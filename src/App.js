@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Items from "./Items";
+import ItemForm from "./ItemForm";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    groceryItems: [
+      { id: 1, item: 'bananas', complete: true },
+      { id: 2, item: 'apples', complete: true },
+      { id: 3, item: 'rice', complete: true },
+      { id: 4, item: 'beans', complete: true },
+      { id: 5, item: 'beer', complete: true },
+      { id: 6 , item: 'toilet paper', complete: true },
+      { id: 7, item: 'hamburger', complete: true },
+    ],
+  };
+
+addItem = (item) => {
+  console.log(item);
+  // const { groceryItems } = this.state;
+  const newItem = {...item, id: Math.random()};
+  this.setState({
+    groceryItems: [...this.state.groceryItems, newItem],
+  });
+};
+  render() {
+    return (
+      <>
+       <Items groceryItems={this.state.groceryItems}/>
+       <hr/>
+       <ItemForm add={this.addItem}/>
+      </>
+    );
+  }
 }
 
 export default App;
